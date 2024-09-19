@@ -38,10 +38,10 @@ app.post('/calculate', (req, res) => {
     airportConnections.set(start, end);
   });
 
-  // Find the starting airport (an airport that's a start but not an end)
+  // Find the starting airport
   let startingAirport = [...starts].find(start => !ends.has(start));
 
-  // Find the ending airport (an airport that's an end but not a start)
+  // Find the ending airport
   let endingAirport = [...ends].find(end => !starts.has(end));
 
   // Handle circular paths
@@ -53,7 +53,7 @@ app.post('/calculate', (req, res) => {
     let currentAirport = startingAirport;
     const visited = new Set();
 
-    // Loop until we revisit an airport (completing the circle)
+    // Loop until an airport is revisited - completing the circle
     while (!visited.has(currentAirport)) {
       visited.add(currentAirport);
       const nextAirport = airportConnections.get(currentAirport);
@@ -72,13 +72,13 @@ app.post('/calculate', (req, res) => {
       currentAirport = nextAirport;
     }
     
-    // If we haven't set an ending airport, use the last one in the path
+    // If an ending airport has not been set, use the last one in the path
     if (!endingAirport) {
       endingAirport = currentAirport;
     }
   }
 
-  // Ensure start and end are different
+  // Ensure start and end points are different
   if (startingAirport === endingAirport) {
     // If they're the same, choose the next airport in the sequence as the end
     endingAirport = airportConnections.get(startingAirport);

@@ -1,4 +1,3 @@
-// Import necessary testing libraries and the app to be tested
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../app.js';
@@ -39,7 +38,7 @@ const generateRandomFlightPairs = (numPairs, complexity = 'simple') => {
   return flightPairs;
 };
 
-// Main test suite for the POST /calculate endpoint
+// Main tests for the POST /calculate endpoint
 describe('POST /calculate', () => {
   // Enhanced random testing
   describe('Random Flight Path Tests', () => {
